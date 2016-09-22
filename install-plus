@@ -1,0 +1,26 @@
+#!/bin/bash
+# you can run this to update plus too
+# updating will not run plusifier again, only replace files
+
+. ./env
+
+path=$(pwd)
+
+echo "Downloading JJ2 Plus..."
+
+mkdir -p dl
+
+plusurl="http://www.jazz2online.com/jj2plus/plus.zip"
+curl -o "dl/plus.zip" -z "dl/plus.zip" -L "$plusurl" --connect-timeout 30
+
+echo "Extracting JJ2 Plus..."
+unzip -o "dl/plus.zip" -d game
+
+if [ ! -f "game/Jazz2+.exe" ]; then
+	echo "Patching JJ2 with plusifier..."
+
+	cd game
+	rm -f "Jazz2+.exe"
+
+	echo no | xvfb-run -a --server-args="-screen 0 640x480x8" "$path/ahk/ahk" "../ahk/plusifier.ahk" #&> /dev/null
+fi

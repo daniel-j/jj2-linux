@@ -10,8 +10,14 @@ if [ -z "$path" ]; then
 fi
 
 exe="$path/Jazz2+.exe"
-flags="-windowed -menu -nolog -noddrawwin -noddraw -noddrawmemcheck -nojoy -noerrtrap -nocpucheck $extraflags"
+flags="-windowed -menu -nolog -nospy -noddrawwin -noddraw -noddrawmemcheck -nojoy -noerrtrap -nocpucheck $extraflags"
 
-echo "Starting $exe $flags"
+if [ ! -f "$exe" ]; then
+	echo "$exe not found"
+	exit 1
+fi
+
+echo "Launching $exe $flags"
+echo "Running in wine prefix $WINEPREFIX"
 
 wine start /wait "$exe" $flags

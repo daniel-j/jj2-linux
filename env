@@ -1,5 +1,8 @@
 #!/bin/bash
 
-export WINEPREFIX=$(pwd)/.wine
-export WINEARCH=win32
-export WINEDEBUG=fixme-all,err-all
+[ -z "$WINEPREFIX" ] && export WINEPREFIX=$(pwd)/.wine
+[ -z "$WINEARCH" ] && export WINEARCH=win32
+[ -z "$WINEDEBUG" ] && export WINEDEBUG=fixme-all,err-all
+
+# diable gecko and mono popup
+export WINEDLLOVERRIDES="mscoree,mshtml="

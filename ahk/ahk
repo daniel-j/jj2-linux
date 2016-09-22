@@ -2,6 +2,13 @@
 
 d=$(dirname "$0")
 b=${1##*/}
+
+if [ ! -f "$d/AutoHotkey.exe" ]; then
+	echo "AutoHotkey not found."
+	echo "Download it with ./download"
+	exit 1
+fi
+
 echo "Running AutoHotkey script ${b%.*}..."
 
 wine "$d/AutoHotkey.exe" "$1"

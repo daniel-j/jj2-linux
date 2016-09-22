@@ -1,0 +1,16 @@
+#!/bin/bash
+
+path="$1"
+extraflags="${@:2}"
+
+export WINEPREFIX="$(pwd)/$path/.wine"
+
+echo "Starting dedicated JJ2 server $1"
+
+mkdir -p "$path"
+
+. ./link "$path"
+
+# comment next line to run in current xorg
+xvfb-run -a --server-args="-screen 0 640x480x8" \
+	./start "$path" -nosound -server "$extraflags"

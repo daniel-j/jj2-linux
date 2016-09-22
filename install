@@ -2,12 +2,18 @@
 
 . ./env
 
+if [ ! -f "dl/installer.exe" ]; then
+	echo "JJ2 installer not found."
+	echo "Load it with ./download <url> or ./download file://<path>"
+	exit 1
+fi
+
 #echo "Initializing wine prefix..."
 #xvfb-run -a --server-args="-screen 0 640x480x8" wineboot
 
 # Install JJ2
-echo "Running Jazz Jackrabbit 2 installer..."
+echo "Starting Jazz Jackrabbit 2 installer..."
 xvfb-run -a --server-args="-screen 0 640x480x8" ahk/ahk ahk/install.ahk
 
 # install JJ2 Plus
-. ./plusify
+. ./install-plus
