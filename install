@@ -2,9 +2,6 @@
 
 . ./env
 
-rm -f game
-ln -s .wine/drive_c/Games/Jazz2 game
-
 #echo "Initializing wine prefix..."
 #xvfb-run -a --server-args="-screen 0 640x480x8" wineboot
 

@@ -3,14 +3,16 @@
 . ./env
 
 ahkurl="https://autohotkey.com/download/ahk-u32.zip"
-jj2url=""
+jj2url="$1"
 
 mkdir -p dl
 
-echo "Downloading JJ2 installer..."
-curl -o "dl/installer.exe" -z "dl/installer.exe" -L "$jj2url" --connect-timeout 30
+if [ ! -z "$jj2url" ]; then
+	echo "Downloading JJ2 installer..."
+	curl -o "dl/installer.exe" -z "dl/installer.exe" -L "$jj2url" --connect-timeout 30
+fi
 
-echo "Downloading AutoHotKey..."
+echo "Downloading AutoHotkey..."
 curl -o "dl/ahk.zip" -z "dl/ahk.zip" -L "$ahkurl" --connect-timeout 30
 
 unzip -o "dl/ahk.zip" "AutoHotkey.exe" -d ahk
