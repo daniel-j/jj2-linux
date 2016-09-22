@@ -11,4 +11,3 @@ xvfb-run -a --server-args="-screen 0 640x480x8" ahk/ahk ahk/install.ahk
 
 # install JJ2 Plus
 . ./plusify
-
