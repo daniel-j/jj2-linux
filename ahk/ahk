@@ -1,0 +1,7 @@
+#!/bin/bash
+
+d=$(dirname "$0")
+b=${1##*/}
+echo "Running AutoHotkey script ${b%.*}..."
+
+wine "$d/AutoHotkey.exe" "$1"

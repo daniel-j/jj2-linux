@@ -1,0 +1,17 @@
+#!/bin/bash
+
+. ./env
+
+rm -f game
+ln -s .wine/drive_c/Games/Jazz2 game
+
+#echo "Initializing wine prefix..."
+#xvfb-run -a --server-args="-screen 0 640x480x8" wineboot
+
+# Install JJ2
+echo "Running Jazz Jackrabbit 2 installer..."
+xvfb-run -a --server-args="-screen 0 640x480x8" ahk/ahk ahk/install.ahk
+
+# install JJ2 Plus
+. ./plusify
+

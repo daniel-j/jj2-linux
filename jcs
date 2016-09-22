@@ -1,0 +1,5 @@
+#!/bin/bash
+
+. ./env
+
+wine start /wait game/JCS.exe "$@"

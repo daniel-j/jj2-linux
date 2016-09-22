@@ -1,0 +1,17 @@
+#!/bin/bash
+
+. ./env
+
+path="$1"
+extraflags="${@:2}"
+
+if [ -z "$path" ]; then
+	path="game"
+fi
+
+exe="$path/Jazz2+.exe"
+flags="-windowed -menu -nolog -noddrawwin -noddraw -noddrawmemcheck -nojoy -noerrtrap -nocpucheck $extraflags"
+
+echo "Starting $exe $flags"
+
+wine start /wait "$exe" $flags

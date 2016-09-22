@@ -1,0 +1,5 @@
+#!/bin/bash
+
+export WINEPREFIX=$(pwd)/.wine
+export WINEARCH=win32
+export WINEDEBUG=fixme-all,err-all

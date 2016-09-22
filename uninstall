@@ -1,0 +1,4 @@
+#!/bin/bash
+
+echo "Removing wine prefix..."
+rm -rf .wine

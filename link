@@ -1,0 +1,20 @@
+#!/bin/bash
+
+d=$(pwd)
+
+echo "Linking engine to $1..."
+
+mkdir -p "$1/"
+
+# engine
+ln -sfr "$d/game/Jazz2+.exe" "$1/"
+ln -sfr "$d/game/Anims.j2a" "$1/"
+ln -sfr "$d/game/English.j2s" "$1/"
+ln -sfr "$d/game/Data.j2d" "$1/"
+
+# plus
+ln -sfr "$d/game/plus.dll" "$1/"
+ln -sfr "$d/game/Plus.j2d" "$1/"
+ln -sfr "$d/game/plus.j2a" "$1/"
+ln -sfr "$d/game/zlib1.dll" "$1/"
+ln -sfr "$d/game/bass.dll" "$1/"
