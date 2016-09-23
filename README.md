@@ -7,3 +7,4 @@ Dependencies
 
 `# pacman -S xorg-server-xvfb wine bash curl unzip`
 
+`# apt install xvfb wine bash curl unzip`
