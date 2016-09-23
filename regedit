@@ -2,4 +2,4 @@
 
 . ./env
 
-regedit
+exec regedit "$@"

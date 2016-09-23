@@ -1,0 +1,103 @@
+REGEDIT4
+
+
+; 1.23
+
+[HKEY_CURRENT_USER\Software\Epic MegaGames\Jazz Jackrabbit 2\1.23]
+"Ambient Lighting"=hex:01,00,00,00
+"Hardware Acceleration"=hex:00,00,00,00
+"Low Detail"=hex:00,00,00,00
+"MMX Support"=hex:00,00,00,00
+"Textured Background"=hex:01,00,00,00
+
+[HKEY_CURRENT_USER\Software\Epic MegaGames\Jazz Jackrabbit 2\1.23\Game]
+"LevelFile"="battle1"
+"LocalPlayers"=hex:01,00,00,00
+"MaxPlayers"=hex:20,00,00,00
+"MultiPlayerCount"=hex:0a,00,00,00
+"MultiPlayerType"=hex:02,00,00,00
+"NetPassword"=""
+"NetPrivate"=hex:00,00,00,00
+"NetServerName"=""
+"Team"=hex:ff,ff,ff,ff
+
+[HKEY_CURRENT_USER\Software\Epic MegaGames\Jazz Jackrabbit 2\1.23\General]
+"Language"=hex:00,00,00,00
+
+[HKEY_CURRENT_USER\Software\Epic MegaGames\Jazz Jackrabbit 2\1.23\Player0]
+
+[HKEY_CURRENT_USER\Software\Epic MegaGames\Jazz Jackrabbit 2\1.23\Player1]
+
+[HKEY_CURRENT_USER\Software\Epic MegaGames\Jazz Jackrabbit 2\1.23\Player2]
+
+[HKEY_CURRENT_USER\Software\Epic MegaGames\Jazz Jackrabbit 2\1.23\Player3]
+
+[HKEY_CURRENT_USER\Software\Epic MegaGames\Jazz Jackrabbit 2\1.23\System]
+"Free Scale"=hex:00,00,00,00
+"Last VideoMode"=hex:04,00,00,00
+"Music Active"=hex:01,00,00,00
+"Music Volume"=hex:80,00,00,00
+"Sound FX Active"=hex:01,00,00,00
+"Sound FX Volume"=hex:80,00,00,00
+"Sound Mixing Options"=hex:03,00,00,80
+"Sound Mixing Rate"=hex:44,ac,00,00
+"Spy"=hex:00,00,00,00
+"Window Position"=hex:00,00,00,00,05,00,00,00,8d,02,00,00,13,02,00,00,00,00,00,00,00,00,00,90,00,00,00,90,00,00,00,90,00,00,00,90,00,00,00,00,01,00,00,00
+"Window Snap Data"=hex:
+"Window Snap Presets"=hex:00,00,00,00
+
+[HKEY_CURRENT_USER\Software\Epic MegaGames\Jazz Jackrabbit 2\1.23\VideoSize]
+"BPP"=hex:10,00,00,00
+"Height"=hex:58,02,00,00
+"Width"=hex:20,03,00,00
+
+
+; 1.24 TSF
+
+[HKEY_CURRENT_USER\Software\Epic MegaGames\Jazz Jackrabbit 2 Special Edition\1.24]
+"Ambient Lighting"=hex:01,00,00,00
+"Hardware Acceleration"=hex:00,00,00,00
+"Low Detail"=hex:00,00,00,00
+"MMX Support"=hex:00,00,00,00
+"Textured Background"=hex:01,00,00,00
+
+[HKEY_CURRENT_USER\Software\Epic MegaGames\Jazz Jackrabbit 2 Special Edition\1.24\Game]
+"LevelFile"="battle1"
+"LocalPlayers"=hex:01,00,00,00
+"MaxPlayers"=hex:20,00,00,00
+"MultiPlayerCount"=hex:0a,00,00,00
+"MultiPlayerType"=hex:02,00,00,00
+"NetPassword"=""
+"NetPrivate"=hex:00,00,00,00
+"NetServerName"=""
+"Team"=hex:ff,ff,ff,ff
+
+[HKEY_CURRENT_USER\Software\Epic MegaGames\Jazz Jackrabbit 2 Special Edition\1.24\General]
+"Language"=hex:00,00,00,00
+
+[HKEY_CURRENT_USER\Software\Epic MegaGames\Jazz Jackrabbit 2 Special Edition\1.24\Player0]
+
+[HKEY_CURRENT_USER\Software\Epic MegaGames\Jazz Jackrabbit 2 Special Edition\1.24\Player1]
+
+[HKEY_CURRENT_USER\Software\Epic MegaGames\Jazz Jackrabbit 2 Special Edition\1.24\Player2]
+
+[HKEY_CURRENT_USER\Software\Epic MegaGames\Jazz Jackrabbit 2 Special Edition\1.24\Player3]
+
+[HKEY_CURRENT_USER\Software\Epic MegaGames\Jazz Jackrabbit 2 Special Edition\1.24\System]
+"Free Scale"=hex:00,00,00,00
+"Last VideoMode"=hex:04,00,00,00
+"Music Active"=hex:01,00,00,00
+"Music Volume"=hex:80,00,00,00
+"Sound FX Active"=hex:01,00,00,00
+"Sound FX Volume"=hex:80,00,00,00
+"Sound Mixing Options"=hex:03,00,00,80
+"Sound Mixing Rate"=hex:44,ac,00,00
+"Spy"=hex:00,00,00,00
+"Window Position"=hex:fd,ff,ff,ff,05,00,00,00,2d,03,00,00,8b,02,00,00,00,00,00,00,00,00,00,90,00,00,00,90,00,00,00,90,00,00,00,90,00,00,00,00,01,00,00,00
+"Window Snap Data"=hex:
+"Window Snap Presets"=hex:00,00,00,00
+
+[HKEY_CURRENT_USER\Software\Epic MegaGames\Jazz Jackrabbit 2 Special Edition\1.24\VideoSize]
+"BPP"=hex:10,00,00,00
+"Height"=hex:58,02,00,00
+"Width"=hex:20,03,00,00

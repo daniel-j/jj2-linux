@@ -1,5 +1,7 @@
 #!/bin/bash
 
+exe="$2"
+
 d=$(dirname "$0")
 b=${1##*/}
 
@@ -11,4 +13,12 @@ fi
 
 echo "Running AutoHotkey script ${b%.*}..."
 
-wine "$d/AutoHotkey.exe" "$1"
+if [ "$exe" == "" ]; then
+	exec wine "$d/AutoHotkey.exe" "$1"
+else
+	wine "$exe" &
+	wine "$d/AutoHotkey.exe" "$1" &
+	wait
+fi
+
+

@@ -1,0 +1,5 @@
+#!/bin/bash
+
+echo "Copying skeleton to $1..."
+
+cp -nv skel/* "$1/"

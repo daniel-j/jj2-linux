@@ -1,4 +1,4 @@
-Run, dl/installer.exe
+
 
 WinWaitActive, ahk_class #32770
 ; Start install popup, hit Yes
@@ -29,10 +29,12 @@ ControlClick, Button7, ahk_class #32770
 
 WinWaitClose, ahk_class #32770
 
-Sleep, 2000
+Sleep, 1000
 
 WinWaitActive, ahk_class #32770
 WinWaitClose, ahk_class #32770
+
+Sleep, 200
 
 WinWaitActive, ahk_class #32770
 ; Close the popup

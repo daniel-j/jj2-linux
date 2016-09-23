@@ -1,4 +1,10 @@
 #!/bin/bash
+#
+# You should run this with ./xvfb-run if you don't have an X server
+# ./xvfb-run ./startded <gamedir> <flags>
+#
+
+. ./env
 
 path="$1"
 extraflags="${@:2}"
@@ -7,10 +13,18 @@ export WINEPREFIX="$(pwd)/$path/.wine"
 
 echo "Starting dedicated JJ2 server $1"
 
-mkdir -p "$path"
+# if it's a new directory, copy the skeleton
+if [ ! -d "$path" ]; then
+	mkdir -p "$path"
+	. ./initskeleton "$path"
+fi
 
-. ./link "$path"
+# always attempt to link
+./link "$path"
 
-# comment next line to run in current xorg
-xvfb-run -a --server-args="-screen 0 640x480x8" \
-	./start "$path" -nosound -server "$extraflags"
+if [ -f "$path/startup.reg" ]; then
+	echo "Applying startup.reg"
+	regedit /C "$path/startup.reg"
+fi
+
+exec ./start "$path" -nocpucheck -nosound -server "$extraflags"

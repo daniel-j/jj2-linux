@@ -1,19 +1,58 @@
 #!/bin/bash
+#
+# ./install <optional installer exe path>
+#
 
 . ./env
 
-if [ ! -f "dl/installer.exe" ]; then
-	echo "JJ2 installer not found."
-	echo "Load it with ./download <url> or ./download file://<path>"
+path=$(pwd)
+
+echo "Initializing wine prefix..."
+wineboot
+
+if [ "$1" != "" ]
+then
+	# Install JJ2
+	echo "Starting Jazz Jackrabbit 2 installer..."
+	ahk/ahk "ahk/install.ahk" "$1"
+
+	patchurl="http://www.jazz2online.com/J2Ov2/upload/misc/j2patch_123r.exe"
+
+	aria2c -j1 -s1 -m1 -c -R --connect-timeout=30 -o "dl/j2patch_123r.exe" "$patchurl"
+
+	(cd game && "$path/ahk/ahk" "$path/ahk/123patch.ahk" "$path/dl/j2patch_123r.exe")
+
+elif [ -f "dl/jj2.zip" ]
+then
+	# Extract JJ2
+	echo "Extracting Jazz Jackrabbit 2..."
+	mkdir -p .wine/drive_c/Games
+	unzip -o "dl/jj2.zip" -d .wine/drive_c/Games
+
+	# some zip files have different naming...
+	mv ".wine/drive_c/Games/Jazz Jackrabbit 2" ".wine/drive_c/Games/Jazz2" 2>/dev/null
+	mv ".wine/drive_c/Games/Jazz Jackrabbit 2 - The Secret Files" ".wine/drive_c/Games/Jazz2" 2>/dev/null
+	mv ".wine/drive_c/Games/Jack Jazzrabbit 2" ".wine/drive_c/Games/Jazz2" 2>/dev/null # jack jazzrabbit lol
+
+else
+	echo "Have you downloaded the game? Try ./download"
 	exit 1
 fi
 
-#echo "Initializing wine prefix..."
-#xvfb-run -a --server-args="-screen 0 640x480x8" wineboot
-
-# Install JJ2
-echo "Starting Jazz Jackrabbit 2 installer..."
-xvfb-run -a --server-args="-screen 0 640x480x8" ahk/ahk ahk/install.ahk
-
 # install JJ2 Plus
-. ./install-plus
+./install-plus
+
+# This resets keyboard/joystick mapping to default and plus config.
+rm -fv game/JAZZ2.CFG game/plus.cfg
+
+# clear logs
+rm -fv game/playlog* game/iplog* game/chatlog/* game/jazz2.log
+
+# Deletes savegames
+rm -fv game/SAVEGAME.*
+
+# Deletes cached downloads
+rm -fv game/Cache/*
+
+echo "Setting JJ2's registry to sane defaults..."
+./regedit /C reset.reg

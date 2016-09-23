@@ -11,10 +11,10 @@ echo "Downloading JJ2 Plus..."
 mkdir -p dl
 
 plusurl="http://www.jazz2online.com/jj2plus/plus.zip"
-curl -o "dl/plus.zip" -z "dl/plus.zip" -L "$plusurl" --connect-timeout 30
+aria2c -j1 -s1 -m1 -c -R --connect-timeout=30 -o "dl/plus.zip" "$plusurl"
 
 echo "Extracting JJ2 Plus..."
-unzip -o "dl/plus.zip" -d game
+unzip -q -o "dl/plus.zip" -d game
 
 if [ ! -f "game/Jazz2+.exe" ]; then
 	echo "Patching JJ2 with plusifier..."
@@ -22,5 +22,9 @@ if [ ! -f "game/Jazz2+.exe" ]; then
 	cd game
 	rm -f "Jazz2+.exe"
 
-	echo no | xvfb-run -a --server-args="-screen 0 640x480x8" "$path/ahk/ahk" "../ahk/plusifier.ahk" #&> /dev/null
+	echo no | "$path/xvfb-run" "$path/ahk/ahk" "$path/ahk/plusifier.ahk" "plusifier.exe" #&> /dev/null
+
+	
+else
+	echo "Skipping plusifier, JJ2 is already plusified."
 fi

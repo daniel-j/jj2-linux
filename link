@@ -2,4 +2,4 @@
 
 echo "Linking engine core to $1..."
 
-stow --target "$1/" --dir core .
+stow -v --target "$1/" --dir core .

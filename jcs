@@ -2,4 +2,4 @@
 
 . ./env
 
-wine start /wait game/JCS.exe "$@"
+exec wine start /wait game/JCS.exe "$@"
