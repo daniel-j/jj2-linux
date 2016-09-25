@@ -5,18 +5,6 @@
 
 . ./env
 
-installurl="$1"
-
-mkdir -p dl
-
-if [ "$installurl" != "" ]
-then
-	echo "Downloading JJ2 installer..."
-	#curl -C - -o "dl/installer.exe" -z "dl/installer.exe" "$installurl" --connect-timeout 30
-	#aria2c -j1 -s1 -m1 -c -R --connect-timeout=30 -o "dl/installer.exe" "$installurl"
-
-fi
-
 echo "Downloading JJ2..."
 urls=(
 	"http://www.jazzjackrabbit.net/other_files/Jazz%20Jackrabbit%202.zip"
@@ -26,25 +14,17 @@ urls=(
 aria2c -j1 -s1 -m1 -c -R --connect-timeout=30 -o "dl/jj2.zip" ${urls[@]}
 
 
-if [ ! -f "ahk/AutoHotkey.exe" ]
-then
-	echo "Downloading AutoHotkey..."
-	ahkurl="https://autohotkey.com/download/ahk-u32.zip"
-	aria2c -j1 -s1 -m1 -c -R --connect-timeout=30 -q -o "dl/ahk.zip" "$ahkurl"
+echo "Downloading AutoHotkey..."
+ahkurl="https://autohotkey.com/download/ahk-u32.zip"
+aria2c -j1 -s1 -m1 -c -R --connect-timeout=30 -o "dl/ahk.zip" "$ahkurl"
 
-	# unzip it
-	unzip -q -o "dl/ahk.zip" "AutoHotkey.exe" -d ahk
-	# no need to keep this around
-	rm "dl/ahk.zip"
-fi
+# unzip it
+unzip -q -o "dl/ahk.zip" "AutoHotkey.exe" -d utils
 
-if [ ! -f "dl/jj2-bridge.exe" ]
-then
-	echo "Downloading jj2-bridge..."
-	bridgeurl="https://github.com/daniel-j/jj2-bridge/releases/download/0.0.1/release.zip"
-	aria2c -j1 -s1 -m1 -c -R --connect-timeout=30 -q -o "dl/jj2-bridge.zip" "$bridgeurl"
 
-	# unzip it
-	unzip -q -o "dl/jj2-bridge.zip" "jj2-bridge.exe" -d dl
-	rm "dl/jj2-bridge.zip"
-fi
+echo "Downloading jj2-bridge..."
+bridgeurl="https://github.com/daniel-j/jj2-bridge/releases/download/0.0.2/release.zip"
+aria2c -j1 -s1 -m1 -c -R --connect-timeout=30 -o "dl/jj2-bridge.zip" "$bridgeurl"
+
+# unzip it
+unzip -q -o "dl/jj2-bridge.zip" "jj2-bridge.exe" -d utils

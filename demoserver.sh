@@ -2,18 +2,10 @@
 
 path="servers/demo"
 
-if [ ! -d "$path" ]
-then
-	mkdir -p "$path"
-
-	# initialize the skeleton
-	./initskeleton "$path"
-fi
-
 # first time the server is run, a new wine prefix will be created. Be patient
-# comment next line to not run in a virtual X
+# uncomment next line to run in a virtual X server
 ./xvfb-run \
-./startded "$path" -battle Battle1
+./startded "$path" -counts 3 -capture Capture1
 
 # you can join the demo server from another terminal using the main wine prefix:
 # $ ./start game -connect 127.0.0.1

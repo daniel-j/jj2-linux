@@ -1,4 +1,4 @@
 .wine
 dl
-ahk/AutoHotkey.exe
+utils/*.exe
 servers/

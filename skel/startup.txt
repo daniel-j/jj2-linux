@@ -1,1 +1,2 @@
 ; jj2 commands/chat to run/send on server startup
+>> jj2-bridge is running

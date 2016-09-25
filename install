@@ -14,13 +14,13 @@ if [ "$1" != "" ]
 then
 	# Install JJ2
 	echo "Starting Jazz Jackrabbit 2 installer..."
-	ahk/ahk "ahk/install.ahk" "$1"
+	utils/ahk "utils/install.ahk" "$1"
 
 	patchurl="http://www.jazz2online.com/J2Ov2/upload/misc/j2patch_123r.exe"
 
 	aria2c -j1 -s1 -m1 -c -R --connect-timeout=30 -o "dl/j2patch_123r.exe" "$patchurl"
 
-	(cd game && "$path/ahk/ahk" "$path/ahk/123patch.ahk" "$path/dl/j2patch_123r.exe")
+	(cd game && "$path/utils/ahk" "$path/utils/123patch.ahk" "$path/dl/j2patch_123r.exe")
 
 elif [ -f "dl/jj2.zip" ]
 then

@@ -28,7 +28,7 @@ then
 	cd game
 	rm -f "Jazz2+.exe"
 
-	echo no | "$path/xvfb-run" "$path/ahk/ahk" "$path/ahk/plusifier.ahk" "plusifier.exe"
+	echo no | "$path/xvfb-run" "$path/utils/ahk" "$path/utils/plusifier.ahk" "plusifier.exe"
 
 	
 else

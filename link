@@ -1,5 +1,9 @@
 #!/bin/bash
 
-echo "Linking engine core to $1..."
+echo "Linking game to $1..."
 
 stow -v --target "$1/" --dir core .
+
+mkdir -p "$1/.wine/drive_c/Games/"
+rm -f "$1/.wine/drive_c/Games/Jazz2"
+ln -sr game "$1/.wine/drive_c/Games/Jazz2"

@@ -27,7 +27,7 @@ stopserver() {
 if [ ! -d "$path" ]
 then
 	mkdir -p "$path"
-	. ./initskeleton "$path"
+	./initskeleton "$path"
 fi
 
 # always attempt to link
@@ -51,21 +51,16 @@ then
 	exit 1
 fi
 
-# Create file if it doesn't exist
-touch "$path/chatlog001.txt"
-
-wineboot
-mkdir -p "$path/.wine/drive_c/Games/"
-ln -svr game "$path/.wine/drive_c/Games/Jazz2"
-
-# Show chatlogger output to stdout. Does not show all characters
-(tail -f -n0 "$path/chatlog001.txt"; stopserver) &
+touch "$path/chatlog001.txt" "$path/playlog001.txt" "$path/iplog001.txt"
 
 # Start JJ2!
 (./start "$path" -nocpucheck -nosound -server "$extraflags"; stopserver) &
 
+# Show chatlog, playlog and iplog output to stdout. Does not show all characters
+(tail -f -n0 --quiet "$path/chatlog001.txt" "$path/playlog001.txt" "$path/iplog001.txt"; stopserver) &
+
 # stdin! Send chat and plus commands. Does not support all characters
 # send /close to cleanly shut down the JJ2 server by closing its window (Windows API)
-(echo -e "$initcommands" && cat) | wine dl/jj2-bridge
+(echo -e "$initcommands" && cat) | wine utils/jj2-bridge.exe
 
 wait
