@@ -8,10 +8,6 @@ then
 
 	# initialize the skeleton
 	./initskeleton "$path"
-
-	# here for demo purposes
-	#echo "Adding some game files..."
-	#cp -vn game/Battle1.j2l game/Castle1.j2t game/Castle.j2b "$path"
 fi
 
 # first time the server is run, a new wine prefix will be created. Be patient
