@@ -5,7 +5,8 @@ exe="$2"
 d=$(dirname "$0")
 b=${1##*/}
 
-if [ ! -f "$d/AutoHotkey.exe" ]; then
+if [ ! -f "$d/AutoHotkey.exe" ]
+then
 	echo "AutoHotkey not found."
 	echo "Download it with ./download"
 	exit 1
@@ -13,7 +14,8 @@ fi
 
 echo "Running AutoHotkey script ${b%.*}..."
 
-if [ "$exe" == "" ]; then
+if [ "$exe" == "" ]
+then
 	exec wine "$d/AutoHotkey.exe" "$1"
 else
 	wine "$exe" &

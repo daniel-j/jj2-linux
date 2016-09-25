@@ -1,6 +1,10 @@
 #!/bin/bash
-# you can run this to update plus too
-# updating will not run plusifier again, only replace files
+# You can run this to update JJ2 Plus
+# Updating will not run plusifier again, only update the files
+#
+# If you want to skip overwriting ini files: echo N | ./install-plus
+# Replace N with A if you want to overwrite. Default action is to ask
+#
 
 . ./env
 
@@ -14,15 +18,17 @@ plusurl="http://www.jazz2online.com/jj2plus/plus.zip"
 aria2c -j1 -s1 -m1 -c -R --connect-timeout=30 -o "dl/plus.zip" "$plusurl"
 
 echo "Extracting JJ2 Plus..."
-unzip -q -o "dl/plus.zip" -d game
+unzip -C -o -d game "dl/plus.zip" -x *.ini
+unzip -C -d game "dl/plus.zip" *.ini
 
-if [ ! -f "game/Jazz2+.exe" ]; then
+if [ ! -f "game/Jazz2+.exe" ]
+then
 	echo "Patching JJ2 with plusifier..."
 
 	cd game
 	rm -f "Jazz2+.exe"
 
-	echo no | "$path/xvfb-run" "$path/ahk/ahk" "$path/ahk/plusifier.ahk" "plusifier.exe" #&> /dev/null
+	echo no | "$path/xvfb-run" "$path/ahk/ahk" "$path/ahk/plusifier.ahk" "plusifier.exe"
 
 	
 else

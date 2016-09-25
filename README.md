@@ -5,6 +5,6 @@ A Linux tool to install, manage and run Jazz Jackrabbit 2 with focus on automati
 Dependencies
 ---
 
-`# pacman -S xorg-server-xvfb wine bash aria2 unzip stow`
+`# pacman -S xorg-server-xvfb wine bash aria2 unzip stow lsof`
 
-`# apt install xvfb wine bash aria2 unzip stow`
+`# apt install xvfb wine bash aria2 unzip stow lsof`

@@ -1,3 +1,3 @@
 #!/bin/bash
 
-exec xvfb-run -a --server-args="-screen 0 640x480x16" exec "$@"
+exec xvfb-run -a --server-args="-screen 0 800x600x16" exec "$@"

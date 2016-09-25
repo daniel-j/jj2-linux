@@ -39,10 +39,10 @@ else
 	exit 1
 fi
 
-# install JJ2 Plus
-./install-plus
+# install JJ2 Plus. Do not overwrite config files by default
+echo N | ./install-plus
 
-# This resets keyboard/joystick mapping to default and plus config.
+# This resets keyboard/joystick mapping to default and plus (mouse?) config.
 rm -fv game/JAZZ2.CFG game/plus.cfg
 
 # clear logs

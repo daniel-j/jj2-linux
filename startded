@@ -13,8 +13,19 @@ export WINEPREFIX="$(pwd)/$path/.wine"
 
 echo "Starting dedicated JJ2 server $1"
 
+trap 'stopserver' INT
+
+stopserver() {
+    trap '' INT TERM     # ignore INT and TERM while shutting down
+    echo "**** Shutting down... ****"     # added double quotes
+    kill -TERM 0         # fixed order, send TERM not INT
+    wait
+    echo "Done."
+}
+
 # if it's a new directory, copy the skeleton
-if [ ! -d "$path" ]; then
+if [ ! -d "$path" ]
+then
 	mkdir -p "$path"
 	. ./initskeleton "$path"
 fi
@@ -22,9 +33,39 @@ fi
 # always attempt to link
 ./link "$path"
 
-if [ -f "$path/startup.reg" ]; then
+if [ -f "$path/startup.reg" ]
+then
 	echo "Applying startup.reg"
 	regedit /C "$path/startup.reg"
 fi
 
-exec ./start "$path" -nocpucheck -nosound -server "$extraflags"
+initcommands=$(cat $path/startup.txt 2> /dev/null | grep -v '^;')
+
+# check if chatlog file is in use. if it is, abort
+chatlogfile=$(realpath "$path/chatlog001.txt")
+ischatloggeropen=$(lsof | grep -F "$chatlogfile" | wc -l)
+
+if [ "$ischatloggeropen" -gt "0" ]
+then
+	echo "Error: A program is already accessing $path/chatlog001.txt"
+	exit 1
+fi
+
+# Create file if it doesn't exist
+touch "$path/chatlog001.txt"
+
+wineboot
+mkdir -p "$path/.wine/drive_c/Games/"
+ln -svr game "$path/.wine/drive_c/Games/Jazz2"
+
+# Show chatlogger output to stdout. Does not show all characters
+(tail -f -n0 "$path/chatlog001.txt"; stopserver) &
+
+# Start JJ2!
+(./start "$path" -nocpucheck -nosound -server "$extraflags"; stopserver) &
+
+# stdin! Send chat and plus commands. Does not support all characters
+# send /close to cleanly shut down the JJ2 server by closing its window (Windows API)
+(echo -e "$initcommands" && cat) | wine dl/jj2-bridge
+
+wait
