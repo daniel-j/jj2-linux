@@ -58,7 +58,7 @@ fi
 (./start "$path" -nocpucheck -nosound -server "$extraflags"; stopserver) &
 
 # Show chatlog, playlog and iplog output to stdout. Does not show all characters
-(tail -f -n0 --quiet "$path/chatlog001.txt" "$path/playlog001.txt" "$path/iplog001.txt"; stopserver) &
+(tail -f -n0 --quiet "$path/chatlog001.txt" "$path/playlog001.txt" "$path/iplog001.txt" | grep --invert-match -F "Name: |Server Query|"; stopserver) &
 
 # stdin! Send chat and plus commands. Does not support all characters
 # send /close to cleanly shut down the JJ2 server by closing its window (Windows API)
