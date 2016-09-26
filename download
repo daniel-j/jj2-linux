@@ -25,7 +25,7 @@ unzip -q -o "dl/ahk.zip" "AutoHotkey.exe" -d utils
 
 
 echo "Downloading jj2-bridge..."
-bridgeurl="https://github.com/daniel-j/jj2-bridge/releases/download/0.0.2/release.zip"
+bridgeurl="https://github.com/daniel-j/jj2-bridge/releases/download/0.0.3/release.zip"
 aria2c -j1 -s1 -m1 -c -R --connect-timeout=30 -o "dl/jj2-bridge.zip" "$bridgeurl"
 
 # unzip it
