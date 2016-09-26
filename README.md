@@ -10,3 +10,6 @@ Dependencies
 `# apt install xvfb wine bash aria2 unzip stow lsof realpath`
 
 `iconv` from libc
+
+Uses [https://autohotkey.com/](AutoHotkey) and [https://github.com/daniel-j/jj2-bridge](jj2-bridge)
+
