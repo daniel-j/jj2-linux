@@ -55,4 +55,4 @@ rm -fv game/SAVEGAME.*
 rm -fv game/Cache/*
 
 echo "Setting JJ2's registry to sane defaults..."
-./regedit /C reset.reg
+./regedit reset.reg

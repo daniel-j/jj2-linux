@@ -27,6 +27,7 @@ stopserver() {
 if [ ! -d "$path" ]
 then
 	mkdir -p "$path"
+	wineboot
 	./initskeleton "$path"
 fi
 
@@ -36,10 +37,12 @@ fi
 if [ -f "$path/startup.reg" ]
 then
 	echo "Applying startup.reg"
-	regedit /C "$path/startup.reg"
+	regedit "$path/startup.reg"
 fi
 
 initcommands=$(cat $path/startup.txt 2> /dev/null | grep -v '^;')
+
+touch "$path/chatlog001.txt" "$path/playlog001.txt" "$path/iplog001.txt"
 
 # check if chatlog file is in use. if it is, abort
 chatlogfile=$(realpath "$path/chatlog001.txt")
@@ -50,8 +53,6 @@ then
 	echo "Error: A program is already accessing $path/chatlog001.txt"
 	exit 1
 fi
-
-touch "$path/chatlog001.txt" "$path/playlog001.txt" "$path/iplog001.txt"
 
 # Start JJ2!
 (./start "$path" -nocpucheck -nosound -server "$extraflags"; stopserver) &
