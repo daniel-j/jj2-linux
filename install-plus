@@ -30,7 +30,6 @@ then
 
 	echo no | "$path/xvfb-run" "$path/utils/ahk" "$path/utils/plusifier.ahk" "plusifier.exe"
 
-	
 else
 	echo "Skipping plusifier, JJ2 is already plusified."
 fi
