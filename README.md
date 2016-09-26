@@ -11,5 +11,5 @@ Dependencies
 
 `iconv` from libc
 
-Uses [https://autohotkey.com/](AutoHotkey) and [https://github.com/daniel-j/jj2-bridge](jj2-bridge)
+Uses [AutoHotkey](https://autohotkey.com/) and [jj2-bridge](https://github.com/daniel-j/jj2-bridge)
 
