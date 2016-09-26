@@ -46,7 +46,7 @@ echo N | ./install-plus
 rm -fv game/JAZZ2.CFG game/plus.cfg
 
 # clear logs
-rm -fv game/playlog* game/iplog* game/chatlog/* game/jazz2.log
+rm -fv game/playlog* game/iplog* game/chatlog* game/jazz2.log
 
 # Deletes savegames
 rm -fv game/SAVEGAME.*
