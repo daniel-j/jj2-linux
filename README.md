@@ -8,3 +8,5 @@ Dependencies
 `# pacman -S xorg-server-xvfb wine bash aria2 unzip stow lsof realpath`
 
 `# apt install xvfb wine bash aria2 unzip stow lsof realpath`
+
+`iconv` from libc

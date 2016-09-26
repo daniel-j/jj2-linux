@@ -27,6 +27,7 @@ stopserver() {
 if [ ! -d "$path" ]
 then
 	mkdir -p "$path"
+	echo "Initializing wine prefix..."
 	wineboot
 	./initskeleton "$path"
 fi
@@ -57,11 +58,11 @@ fi
 # Start JJ2!
 (./start "$path" -nocpucheck -nosound -server "$extraflags"; stopserver) &
 
-# Show chatlog, playlog and iplog output to stdout. Does not show all characters
-(tail -f -n0 --quiet "$path/chatlog001.txt" "$path/playlog001.txt" "$path/iplog001.txt" | grep --invert-match -F "Name: |Server Query|"; stopserver) &
+# Show chatlog, playlog and iplog output to stdout.
+(tail -f -n0 --quiet "$path/chatlog001.txt" "$path/playlog001.txt" "$path/iplog001.txt" | while IFS=$'\r\n' read -r line ; do echo "$line" | iconv -f MS-ANSI -t UTF-8 -c ; done | grep --invert-match -F "Name: |Server Query|"; stopserver) &
 
-# stdin! Send chat and plus commands. Does not support all characters
+# stdin! Send chat and plus commands.
 # send /close to cleanly shut down the JJ2 server by closing its window (Windows API)
-(echo -e "$initcommands" && cat) | wine utils/jj2-bridge.exe
+(echo -e "$initcommands" && cat) | while IFS=$'\n' read -r line ; do echo "$line" | iconv -f UTF-8 -t MS-ANSI -c ; done | wine utils/jj2-bridge.exe
 
 wait
