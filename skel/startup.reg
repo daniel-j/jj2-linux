@@ -59,9 +59,11 @@ REGEDIT4
 ;"Height"=hex:58,02,00,00
 ;"Width"=hex:20,03,00,00
 ; 640x480
-"Height"=hex:e0,01,00,00
-"Width"=hex:80,02,00,00
-
+;"Height"=hex:e0,01,00,00
+;"Width"=hex:80,02,00,00
+; 320x240
+"Height"=hex:f0,00,00,00
+"Width"=hex:40,01,00,00
 
 ; 1.24
 
@@ -118,5 +120,8 @@ REGEDIT4
 ;"Height"=hex:58,02,00,00
 ;"Width"=hex:20,03,00,00
 ; 640x480
-"Height"=hex:e0,01,00,00
-"Width"=hex:80,02,00,00
+;"Height"=hex:e0,01,00,00
+;"Width"=hex:80,02,00,00
+; 320x240
+"Height"=hex:f0,00,00,00
+"Width"=hex:40,01,00,00
