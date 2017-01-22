@@ -10,7 +10,7 @@ Screenshot: A running dedicated server.
 Dependencies
 ---
 
-`# pacman -S xorg-server-xvfb wine bash aria2 unzip stow lsof realpath`
+`# pacman -S xorg-server-xvfb wine bash aria2 unzip stow lsof lib32-libldap`
 
 `# apt install xvfb wine bash aria2 unzip stow lsof realpath`
 

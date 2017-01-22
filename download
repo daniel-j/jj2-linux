@@ -15,14 +15,14 @@ aria2c -j1 -s1 -m1 -c -R --connect-timeout=30 -o "dl/jj2.zip" ${urls[@]}
 
 
 echo "Downloading AutoHotkey..."
-ahkurl="https://autohotkey.com/download/ahk-u32.zip"
-#aria2c -j1 -s1 -m1 -c -R --connect-timeout=30 -o "dl/ahk.zip" "$ahkurl"
-curl -o "dl/ahk.zip" -z "dl/ahk.zip" -L "$ahkurl" --connect-timeout 30
+ahkurl="https://autohotkey.com/download/ahk.zip"
+aria2c -j1 -s1 -m1 -c -R --connect-timeout=30 -o "dl/ahk.zip" "$ahkurl"
+#curl -o "dl/ahk.zip" -z "dl/ahk.zip" -L "$ahkurl" --connect-timeout 30
 
 
 # unzip it
-unzip -q -o "dl/ahk.zip" "AutoHotkey.exe" -d utils
-
+unzip -q -o "dl/ahk.zip" "AutoHotkeyU32.exe" -d utils
+mv utils/AutoHotkeyU32.exe utils/AutoHotkey.exe
 
 echo "Downloading jj2-bridge..."
 bridgeurl="https://github.com/daniel-j/jj2-bridge/releases/download/0.0.3/release.zip"
