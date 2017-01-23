@@ -30,7 +30,7 @@ fi
 
 if [ -f "$path/startup.reg" ]
 then
-	(echo "Applying startup.reg"
+	echo "Applying startup.reg"
 	regedit "$path/startup.reg"
 fi
 
