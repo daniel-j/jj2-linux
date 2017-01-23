@@ -11,7 +11,11 @@ rl = readline.createInterface({
   input: process.stdin,
   output: process.stdout
 })
-rl.setPrompt('> ')
+if (process.stdout.isTTY) {
+  rl.setPrompt('> ')
+} else {
+  rl.setPrompt('')
+}
 rl.on('line', (line) => {
   bridge.stdin.write(line + '\n', 'binary')
   rl.prompt()
