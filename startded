@@ -7,41 +7,14 @@
 . ./env
 
 path="$1"
-extraflags="${@:2}"
+shift
 
 export WINEPREFIX="$(pwd)/$path/.wine"
 
 echo "Starting dedicated JJ2 server $1"
 
-trap 'stopserver' INT
-
-stopserver() {
-    trap '' INT TERM     # ignore INT and TERM while shutting down
-    echo "**** Shutting down... ****"     # added double quotes
-    kill -TERM 0         # fixed order, send TERM not INT
-    wait
-    echo "Done."
-}
-
-# if it's a new directory, copy the skeleton
-if [ ! -d "$path" ]
-then
-	mkdir -p "$path"
-	echo "Initializing wine prefix..."
-	wineboot
-	./initskeleton "$path"
-fi
-
 # always attempt to link
 ./link "$path"
-
-if [ -f "$path/startup.reg" ]
-then
-	echo "Applying startup.reg"
-	regedit "$path/startup.reg"
-fi
-
-initcommands=$(cat $path/startup.txt 2> /dev/null | grep -v '^;')
 
 touch "$path/chatlog001.txt" "$path/playlog001.txt" "$path/iplog001.txt"
 
@@ -51,18 +24,17 @@ ischatloggeropen=$(lsof | grep -F "$chatlogfile" | wc -l)
 
 if [ "$ischatloggeropen" -gt "0" ]
 then
-	echo "Error: A program is already accessing $path/chatlog001.txt"
+	echo "Error: A program is already accessing $path/chatlog001.txt" >&2
 	exit 1
 fi
 
-# Start JJ2!
-(./start "$path" -nocpucheck -nosound -server "$extraflags"; stopserver) &
+if [ -f "$path/startup.reg" ]
+then
+	(echo "Applying startup.reg"
+	regedit "$path/startup.reg"
+fi
 
-# Show chatlog, playlog and iplog output to stdout.
-(tail -f -n0 --quiet "$path/chatlog001.txt" "$path/playlog001.txt" "$path/iplog001.txt" | while IFS=$'\r\n' read -r line ; do echo "$line" | iconv -f MS-ANSI -t UTF-8 -c ; done | grep --invert-match -F "Name: |Server Query|"; stopserver) &
+./startded.js "$path" "$@" || true
 
-# stdin! Send chat and plus commands.
-# send /close to cleanly shut down the JJ2 server by closing its window (Windows API)
-(echo -e "$initcommands" && cat) | while IFS=$'\n' read -r line ; do echo "$line" | iconv -f UTF-8 -t MS-ANSI -c ; done | wine utils/jj2-bridge.exe
-
-wait
+echo "Ending wine session..."
+wineboot --end-session

@@ -1,5 +1,14 @@
 #!/bin/bash
 
-echo "Copying skeleton to $1..."
+path="$1"
+skel="${2-skel}"
 
-cp -nv skel/* "$1/"
+# if it's a new directory, copy the skeleton
+if [ ! -d "$path" ]
+then
+	mkdir -p "$path"
+	echo "Initializing wine prefix..."
+	wineboot --init
+	echo "Copying skeleton to $1..."
+	cp -nrv "$skel/." "$path/"
+fi

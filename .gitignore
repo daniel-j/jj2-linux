@@ -2,3 +2,5 @@
 dl
 utils/*.exe
 servers/
+node_modules/
+*-skel/

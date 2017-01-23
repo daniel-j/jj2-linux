@@ -1,0 +1,17 @@
+{
+  "name": "jj2-linux",
+  "version": "0.0.1",
+  "description": "jj2-linux === A Linux tool to install, manage and run Jazz Jackrabbit 2 with focus on automation and scripting.",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/daniel-j/jj2-linux.git"
+  },
+  "author": "djazz",
+  "bugs": {
+    "url": "https://github.com/daniel-j/jj2-linux/issues"
+  },
+  "homepage": "https://github.com/daniel-j/jj2-linux#readme",
+  "dependencies": {
+    "colors": "^1.1.2"
+  }
+}
