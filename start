@@ -13,8 +13,8 @@ then
 	path="game"
 fi
 
-exe="$path/Jazz2+.exe"
-flags="-windowed -menu -nolog -nospy -noddrawmemcheck -noerrtrap $extraflags"
+exe="$path/Jazz2.exe"
+flags="-windowed -menu -nolog -nospy -noddrawmemcheck -noddrawwin -noddraw -nocpucheck -noerrtrap $extraflags"
 
 if [ ! -f "$exe" ]
 then

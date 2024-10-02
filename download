@@ -5,33 +5,34 @@
 
 . ./env
 
-echo "Downloading JJ2..."
-urls=(
-	"http://www.jazzjackrabbit.net/other_files/Jazz%20Jackrabbit%202.zip"
-	"http://www.bestoldgames.net/download/bgames/jazz-jackrabbit-2.zip"
-	"http://files.abandonia.com/download.php?game=Jazz+Jackrabbit+2&secure=ce95c11a306aa2eeaadff7b0e973e3fa&td=1304618652"
-)
-aria2c -j1 -s1 -m1 -c -R --connect-timeout=30 -o "dl/jj2.zip" ${urls[@]}
+# echo "Downloading JJ2..."
+# urls=(
+# 	"http://www.jazzjackrabbit.net/other_files/Jazz%20Jackrabbit%202.zip"
+# 	"http://www.bestoldgames.net/download/bgames/jazz-jackrabbit-2.zip"
+# 	"http://files.abandonia.com/download.php?game=Jazz+Jackrabbit+2&secure=ce95c11a306aa2eeaadff7b0e973e3fa&td=1304618652"
+# )
+# aria2c -j1 -s1 -m1 -c -R --connect-timeout=30 -o "dl/jj2.zip" ${urls[@]}
 
 
 echo "Downloading AutoHotkey..."
 ahkurl="https://autohotkey.com/download/ahk.zip"
 aria2c -j1 -s1 -m1 -c -R --connect-timeout=30 -o "dl/ahk.zip" "$ahkurl"
 #curl -o "dl/ahk.zip" -z "dl/ahk.zip" -L "$ahkurl" --connect-timeout 30
-
-
-# unzip it
 unzip -q -o "dl/ahk.zip" "AutoHotkeyU32.exe" -d utils
 mv utils/AutoHotkeyU32.exe utils/AutoHotkey.exe
+
 
 echo "Downloading jj2-bridge..."
 bridgeurl="https://github.com/daniel-j/jj2-bridge/releases/download/0.0.3/release.zip"
 aria2c -j1 -s1 -m1 -c -R --connect-timeout=30 -o "dl/jj2-bridge.zip" "$bridgeurl"
-
-# unzip it
 unzip -q -o "dl/jj2-bridge.zip" "jj2-bridge.exe" -d utils
 
 
-echo "Downloading JJ2 Plus..."
-plusurl="http://www.jazz2online.com/jj2plus/plus.zip"
-aria2c -j1 -s1 -m1 -c -R --connect-timeout=30 -o "dl/plus.zip" "$plusurl"
+echo "Downloading JJ2+ installer..."
+plusurl="https://get.jj2.plus"
+aria2c -j1 -s1 -m1 -c -R --connect-timeout=30 -o "dl/plus_installer.zip" "$plusurl"
+
+# echo "Downloading cnc-ddraw..."
+# cncddrawurl="https://github.com/FunkyFr3sh/cnc-ddraw/releases/download/v6.9.0.0/cnc-ddraw.zip"
+# aria2c -j1 -s1 -m1 -c -R --connect-timeout=30 -o "dl/cnc-ddraw.zip" "$cncddrawurl"
+

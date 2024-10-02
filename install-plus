@@ -8,28 +8,17 @@
 
 . ./env
 
+set -e
+
 path=$(pwd)
 
-echo "Downloading JJ2 Plus..."
-
-mkdir -p dl
-
-plusurl="http://www.jazz2online.com/jj2plus/plus.zip"
-aria2c -j1 -s1 -m1 -c -R --connect-timeout=30 -o "dl/plus.zip" "$plusurl"
-
 echo "Extracting JJ2 Plus..."
-unzip -C -o -d game "dl/plus.zip" -x *.ini
-unzip -C -d game "dl/plus.zip" *.ini
+unzip -C -o -d "$WINEPREFIX/drive_c/Games/Jazz2" "dl/plus_installer.zip"
 
-if [ ! -f "game/Jazz2+.exe" ]
-then
-	echo "Patching JJ2 with plusifier..."
+cd "$WINEPREFIX/drive_c/Games/Jazz2"
 
-	cd game
-	rm -f "Jazz2+.exe"
+# echo no | "$path/xvfb-run" "$path/utils/ahk" "$path/utils/plusifier.ahk" "plusifier.exe"
 
-	echo no | "$path/xvfb-run" "$path/utils/ahk" "$path/utils/plusifier.ahk" "plusifier.exe"
+wine "plus_install.exe" /S
 
-else
-	echo "Skipping plusifier, JJ2 is already plusified."
-fi
+cd "$path"
