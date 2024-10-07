@@ -121,8 +121,8 @@ let initcommands = startup.trim().split('\n').filter((line) => {
 })
 
 let followpaths = [
-  path.join(p, 'chatlog001.txt'),
-  path.join(p, 'playlog001.txt'),
+  //path.join(p, 'chatlog001.txt'),
+  //path.join(p, 'playlog001.txt'),
   path.join(p, 'iplog001.txt')
 ]
 
@@ -130,7 +130,7 @@ let tail = child_process.spawn('tail', ['-f', '-n0', '--quiet'].concat(followpat
 tail.stdout.on('data', writeLog)
 
 let jj2 = child_process.spawn('./start', [p, '-noddrawwin', '-noddraw', '-nocpucheck', '-nosound', '-nochatlogger', '-server'].concat(extraflags))
-jj2.stdout.on('data', writeOut)
+jj2.stdout.on('data', writeLog)
 jj2.stderr.on('data', writeErr)
 jj2.once('exit', (code, signal) => {
   bridge.kill('SIGINT')
