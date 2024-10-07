@@ -10,9 +10,9 @@ Screenshot: A running dedicated server.
 Dependencies
 ---
 
-`# pacman -S xorg-server-xvfb wine bash aria2 unzip stow lsof lib32-libldap`
+`# pacman -S xorg-server-xvfb wine bash aria2 unzip stow lsof lib32-libldap innoextract`
 
-`# apt install xvfb wine bash aria2 unzip stow lsof realpath`
+`# apt install xvfb wine bash aria2 unzip stow lsof realpath innoextract`
 
 Uses [AutoHotkey](https://autohotkey.com/) and [jj2-bridge](https://github.com/daniel-j/jj2-bridge)
 
