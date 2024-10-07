@@ -5,5 +5,5 @@
 [ -z "$WINEDEBUG" ] && export WINEDEBUG=fixme-all,err-all
 
 # diable gecko and mono popup
-export WINEDLLOVERRIDES="mscoree,mshtml=,winemenubuilder.exe=d"
+export WINEDLLOVERRIDES="mscoree,mshtml=;winemenubuilder.exe=d"
 

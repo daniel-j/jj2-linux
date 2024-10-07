@@ -129,7 +129,7 @@ let followpaths = [
 let tail = child_process.spawn('tail', ['-f', '-n0', '--quiet'].concat(followpaths))
 tail.stdout.on('data', writeLog)
 
-let jj2 = child_process.spawn('./start', [p, '-noddrawwin', '-noddraw', '-nocpucheck', '-nosound', '-nochatlogger', '-server'].concat(extraflags))
+let jj2 = child_process.spawn('./start', [p, '-nosound', '-nochatlogger', '-server'].concat(extraflags))
 jj2.stdout.on('data', writeLog)
 jj2.stderr.on('data', writeErr)
 jj2.once('exit', (code, signal) => {

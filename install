@@ -5,42 +5,64 @@
 
 . ./env
 
+set -e
+
 path=$(pwd)
+
+rm -f game
 
 echo "Initializing wine prefix..."
 wineboot
+
+mkdir -pv "$WINEPREFIX/drive_c/Games/Jazz2"
+haveplus=0
 
 if [ "$1" != "" ]
 then
 	# Install JJ2
 	echo "Starting Jazz Jackrabbit 2 installer..."
-	utils/ahk "utils/install.ahk" "$1"
+	if [[ "$1" == *"setup_jazz_jackrabbit_2_"* ]]; then
+		# gog installer
+		# make sure to get 1.24 with JJ2+
+		if [[ "$1" == *"1.24hf"* ]]; then
+			echo "Can't install JJ2+ for this version (1.24HF). Download version from GOG with the latest JJ2+ included"
+			echo "Jazz Jackrabbit 2 with JJ2+ v5.12 (at the time of writing)"
+			exit 1
+		fi
+		innoextract -e -g -m -d "$WINEPREFIX/drive_c/Games/Jazz2" "$1"
+		haveplus=1
+	else
+		# regular retail 1.20/1.21 JJ2 installer
+		utils/ahk "utils/install.ahk" "$1"
 
-	patchurl="http://www.jazz2online.com/J2Ov2/upload/misc/j2patch_123r.exe"
+		patchurl="http://www.jazz2online.com/J2Ov2/upload/misc/j2patch_123r.exe"
 
-	aria2c -j1 -s1 -m1 -c -R --connect-timeout=30 -o "dl/j2patch_123r.exe" "$patchurl"
+		aria2c -j1 -s1 -m1 -c -R --connect-timeout=30 -o "dl/j2patch_123r.exe" "$patchurl"
 
-	(cd game && "$path/utils/ahk" "$path/utils/123patch.ahk" "$path/dl/j2patch_123r.exe")
+		(cd "$WINEPREFIX/drive_c/Games/Jazz2" && "$path/utils/ahk" "$path/utils/123patch.ahk" "$path/dl/j2patch_123r.exe")
+	fi
 
 elif [ -f "dl/jj2.zip" ]
 then
 	# Extract JJ2
 	echo "Extracting Jazz Jackrabbit 2..."
-	mkdir -p .wine/drive_c/Games
-	unzip -o "dl/jj2.zip" -d .wine/drive_c/Games
+	mkdir -p "$WINEPREFIX/drive_c/Games"
+	unzip -o "dl/jj2.zip" -d "$WINEPREFIX/drive_c/Games"
 
 	# some zip files have different naming...
-	mv ".wine/drive_c/Games/Jazz Jackrabbit 2" ".wine/drive_c/Games/Jazz2" 2>/dev/null
-	mv ".wine/drive_c/Games/Jazz Jackrabbit 2 - The Secret Files" ".wine/drive_c/Games/Jazz2" 2>/dev/null
-	mv ".wine/drive_c/Games/Jack Jazzrabbit 2" ".wine/drive_c/Games/Jazz2" 2>/dev/null # jack jazzrabbit lol
+	(mv "$WINEPREFIX/drive_c/Games/Jazz Jackrabbit 2" "$WINEPREFIX/drive_c/Games/Jazz2" 2>/dev/null; true)
+	(mv "$WINEPREFIX/drive_c/Games/Jazz Jackrabbit 2 - The Secret Files" "$WINEPREFIX/drive_c/Games/Jazz2" 2>/dev/null; true)
+	(mv "$WINEPREFIX/drive_c/Games/Jack Jazzrabbit 2" "$WINEPREFIX/drive_c/Games/Jazz2" 2>/dev/null; true) # jack jazzrabbit lol
 
 else
-	echo "Have you downloaded the game? Try ./download"
+	echo "Have you downloaded the game? Run ./install jj2_setup_file.exe (retail CD or from GOG with JJ2+)"
 	exit 1
 fi
 
-# install JJ2 Plus. Do not overwrite config files by default
-echo N | ./install-plus
+if [ $haveplus == 0 ]; then
+	# install JJ2+
+	./install-plus || exit 1
+fi
 
 # This resets keyboard/joystick mapping to default and plus (mouse?) config.
 rm -fv game/JAZZ2.CFG game/plus.cfg
@@ -54,5 +76,10 @@ rm -fv game/SAVEGAME.*
 # Deletes cached downloads
 rm -fv game/Cache/*
 
+# Installing cnc-ddraw
+# unzip -q -o "dl/cnc-ddraw.zip" "ddraw.dll" "ddraw.ini" -d game
+
 echo "Setting JJ2's registry to sane defaults..."
 ./regedit reset.reg
+
+ln -srv "$WINEPREFIX/drive_c/Games/Jazz2" game
